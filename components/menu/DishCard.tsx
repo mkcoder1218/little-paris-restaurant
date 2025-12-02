@@ -1,5 +1,5 @@
-import Image from 'next/image';
-import { Button } from '@/components/ui/Button';
+import Image from "next/image";
+import { Button } from "@/components/ui/Button";
 
 interface DishProps {
   title: string;
@@ -20,16 +20,16 @@ export const DishCard = ({ title, description, price, image }: DishProps) => {
         />
         <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors duration-500" />
       </div>
-      <div className="p-5 flex flex-col flex-grow relative bg-white">
-        <div className="flex justify-between items-baseline mb-2">
+      {/* <div className="p-5 flex flex-col flex-grow relative bg-white"> */}
+      {/* <div className="flex justify-between items-baseline mb-2">
           <h3 className="text-lg font-medium text-deep font-serif group-hover:text-gold transition-colors duration-300">{title}</h3>
           <span className="text-gold font-medium text-base font-serif whitespace-nowrap ml-2">{price}</span>
-        </div>
-        <p className="text-neutral-500 mb-4 line-clamp-2 flex-grow leading-relaxed font-light text-xs">{description}</p>
-        {/* <Button variant="outline" size="sm" className="w-full mt-auto border-neutral-200 text-deep hover:bg-deep hover:text-white hover:border-deep transition-all duration-300 uppercase tracking-wider text-[10px] font-medium h-8 rounded-sm">
+        </div> */}
+      {/* <p className="text-neutral-500 mb-4 line-clamp-2 flex-grow leading-relaxed font-light text-xs">{description}</p> */}
+      {/* <Button variant="outline" size="sm" className="w-full mt-auto border-neutral-200 text-deep hover:bg-deep hover:text-white hover:border-deep transition-all duration-300 uppercase tracking-wider text-[10px] font-medium h-8 rounded-sm">
           Add
         </Button> */}
-      </div>
+      {/* </div> */}
     </div>
   );
 };

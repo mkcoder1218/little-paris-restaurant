@@ -1,13 +1,13 @@
 "use client";
-import { useState, useEffect } from 'react';
-import Link from 'next/link';
-import { useLanguage } from '@/context/LanguageContext';
-import { Button } from '@/components/ui/Button';
-import { Menu, X, Globe } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { cn } from '@/lib/utils';
+import { useState, useEffect } from "react";
+import Link from "next/link";
+import { useLanguage } from "@/context/LanguageContext";
+import { Button } from "@/components/ui/Button";
+import { Menu, X, Globe } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
-import { usePathname } from 'next/navigation';
+import { usePathname } from "next/navigation";
 
 export const Header = () => {
   const { t, language, setLanguage } = useLanguage();
@@ -16,8 +16,8 @@ export const Header = () => {
   const pathname = usePathname();
 
   // Pages with dark hero sections where header should be transparent/white text initially
-  const hasDarkHero = pathname === '/' || pathname === '/about';
-  
+  const hasDarkHero = pathname === "/" || pathname === "/about";
+
   // Determine header state
   // If scrolled OR not on a dark hero page, show solid background and dark text
   const isSolid = isScrolled || !hasDarkHero;
@@ -27,32 +27,48 @@ export const Header = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const toggleLanguage = () => {
-    setLanguage(language === 'en' ? 'am' : 'en');
+    setLanguage(language === "en" ? "am" : "en");
   };
 
   const navLinks = [
-    { name: t.nav.home, href: '/' },
-    { name: t.nav.menu, href: '/menu' },
-    { name: t.nav.about, href: '/about' },
-    { name: t.nav.gallery, href: '/gallery' },
-    { name: t.nav.contact, href: '/contact' },
+    { name: t.nav.home, href: "/" },
+    // { name: t.nav.menu, href: "/menu" },
+    { name: t.nav.about, href: "/about" },
+    { name: t.nav.gallery, href: "/gallery" },
+    { name: t.nav.contact, href: "/contact" },
   ];
 
   return (
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500",
-        isSolid ? "bg-white/95 backdrop-blur-md shadow-sm py-3" : "bg-transparent py-6"
+        isSolid
+          ? "bg-white/95 backdrop-blur-md shadow-sm py-3"
+          : "bg-transparent py-6"
       )}
     >
       <div className="container mx-auto px-4 flex items-center justify-between">
-        <Link href="/" className={cn("text-2xl font-bold tracking-tighter flex items-center gap-1 font-serif transition-colors", isDarkText ? "text-deep" : "text-white")}>
-          Little <span className={cn("italic transition-colors", isDarkText ? "text-gold" : "text-gold")}>Paris</span>
+        <Link
+          href="/"
+          className={cn(
+            "text-2xl font-bold tracking-tighter flex items-center gap-1 font-serif transition-colors",
+            isDarkText ? "text-deep" : "text-white"
+          )}
+        >
+          Little{" "}
+          <span
+            className={cn(
+              "italic transition-colors",
+              isDarkText ? "text-gold" : "text-gold"
+            )}
+          >
+            Paris
+          </span>
         </Link>
 
         {/* Desktop Nav */}
@@ -63,25 +79,38 @@ export const Header = () => {
               href={link.href}
               className={cn(
                 "text-sm font-medium transition-all duration-300 uppercase tracking-widest relative group",
-                isDarkText ? "text-deep hover:text-gold" : "text-white/90 hover:text-white"
+                isDarkText
+                  ? "text-deep hover:text-gold"
+                  : "text-white/90 hover:text-white"
               )}
             >
               {link.name}
-              <span className={cn(
-                "absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full",
-                isDarkText ? "bg-gold" : "bg-white"
-              )} />
+              <span
+                className={cn(
+                  "absolute -bottom-1 left-0 w-0 h-0.5 transition-all duration-300 group-hover:w-full",
+                  isDarkText ? "bg-gold" : "bg-white"
+                )}
+              />
             </Link>
           ))}
-          <button 
-            onClick={toggleLanguage} 
-            className={cn("transition-colors hover:text-gold", isDarkText ? "text-deep" : "text-white")}
+          <button
+            onClick={toggleLanguage}
+            className={cn(
+              "transition-colors hover:text-gold",
+              isDarkText ? "text-deep" : "text-white"
+            )}
             aria-label="Switch Language"
           >
             <Globe size={20} />
           </button>
           <Link href="/reservation">
-            <Button size="sm" className={cn("transition-all", !isSolid && "bg-white text-deep hover:bg-white/90")}>
+            <Button
+              size="sm"
+              className={cn(
+                "transition-all",
+                !isSolid && "bg-white text-deep hover:bg-white/90"
+              )}
+            >
               {t.nav.reservation}
             </Button>
           </Link>
@@ -89,7 +118,10 @@ export const Header = () => {
 
         {/* Mobile Toggle */}
         <button
-          className={cn("md:hidden transition-colors", isDarkText ? "text-deep" : "text-white")}
+          className={cn(
+            "md:hidden transition-colors",
+            isDarkText ? "text-deep" : "text-white"
+          )}
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X /> : <Menu />}
@@ -101,7 +133,7 @@ export const Header = () => {
         {isMobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
+            animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             className="absolute top-full left-0 right-0 bg-white shadow-lg overflow-hidden md:hidden"
           >
@@ -117,11 +149,20 @@ export const Header = () => {
                 </Link>
               ))}
               <div className="flex flex-col gap-3 mt-2">
-                <Button variant="outline" onClick={toggleLanguage} className="justify-start w-full">
+                <Button
+                  variant="outline"
+                  onClick={toggleLanguage}
+                  className="justify-start w-full"
+                >
                   <Globe size={16} className="mr-2" />
-                  {language === 'en' ? 'Switch to Amharic' : 'Switch to English'}
+                  {language === "en"
+                    ? "Switch to Amharic"
+                    : "Switch to English"}
                 </Button>
-                <Link href="/reservation" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link
+                  href="/reservation"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
                   <Button className="w-full">{t.nav.reservation}</Button>
                 </Link>
               </div>
